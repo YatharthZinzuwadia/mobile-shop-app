@@ -1,24 +1,31 @@
 // - Full-width image carousel with dot indicators & tagline overlay.
 // - Uses local images from assets/images/ for banners.
-import React, { useRef, useState } from "react";
-import { View, FlatList, Image, Dimensions, Text, TouchableOpacity } from "react-native";
-import { useTheme } from "../context/ThemeContext";
+import React, { useRef, useState } from 'react';
+import {
+  View,
+  FlatList,
+  Image,
+  Dimensions,
+  Text,
+  TouchableOpacity
+} from 'react-native';
+import { useTheme } from '../context/ThemeContext';
 
-const { width } = Dimensions.get("window");
+const { width } = Dimensions.get('window');
 
 // Use local images for banners
 const banners = [
   {
-    image: require("../assets/images/unleash-your-style.jpeg"),
-    tagline: ""
+    image: require('../assets/images/unleash-your-style.jpeg'),
+    tagline: ''
   },
   {
-    image: require("../assets/images/run-the-future.jpeg"),
-    tagline: ""
+    image: require('../assets/images/run-the-future.jpeg'),
+    tagline: ''
   },
   {
-    image: require("../assets/images/classic-comfort.jpeg"),
-    tagline: ""
+    image: require('../assets/images/classic-comfort.jpeg'),
+    tagline: ''
   }
 ];
 
@@ -27,7 +34,7 @@ export default function HeroBanner() {
   const [index, setIndex] = useState(0);
   const flatRef = useRef(); // Ref for FlatList
 
-  const onScroll = e => {
+  const onScroll = (e) => {
     const x = e.nativeEvent.contentOffset.x;
     setIndex(Math.round(x / width));
   };
@@ -43,7 +50,7 @@ export default function HeroBanner() {
         showsHorizontalScrollIndicator={false}
         onScroll={onScroll}
         renderItem={({ item }) => (
-          <View style={{ width, alignItems: "center" }}>
+          <View style={{ width, alignItems: 'center' }}>
             {/* Banner image */}
             <Image
               source={item.image}
@@ -52,7 +59,7 @@ export default function HeroBanner() {
                 height: 180,
                 borderRadius: 18,
                 marginHorizontal: 20,
-                resizeMode: "cover"
+                resizeMode: 'cover'
               }}
             />
             {/* <TouchableOpacity
@@ -87,7 +94,9 @@ export default function HeroBanner() {
           </View>
         )}
       />
-      <View style={{ flexDirection: "row", justifyContent: "center", marginTop: 8 }}>
+      <View
+        style={{ flexDirection: 'row', justifyContent: 'center', marginTop: 8 }}
+      >
         {banners.map((_, i) => (
           <View
             key={i}
