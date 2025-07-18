@@ -13,6 +13,7 @@ import { StatusBar } from 'expo-status-bar';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import WishlistScreen from './screens/WishlistScreen';
 import CartScreen from './screens/CartScreen';
+import SplashScreen from './screens/SplashScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -36,8 +37,9 @@ function ThemedNavigation() {
       <StatusBar style={theme.mode === 'dark' ? 'light' : 'dark'} />
       <Stack.Navigator
         screenOptions={{ headerShown: false, animation: 'fade' }}
-        initialRouteName="Home"
+        initialRouteName="Splash"
       >
+        <Stack.Screen name="Splash" component={SplashScreen} />
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="ProductDetail" component={ProductDetailScreen} />
         <Stack.Screen name="Wishlist" component={WishlistScreen} />
