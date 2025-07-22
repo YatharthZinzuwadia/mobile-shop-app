@@ -9,12 +9,14 @@ import {
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useTheme } from '../context/ThemeContext';
+import { useAuth } from '../context/AuthContext';
 
-const { width, height } = Dimensions.get('window');
+const { width } = Dimensions.get('window');
 
 export default function SplashScreen() {
   const navigation = useNavigation();
   const { theme } = useTheme();
+  const { user, authLoading } = useAuth();
   const splashAnim = useRef(new Animated.Value(0)).current;
   const progressAnim = useRef(new Animated.Value(0)).current;
 
@@ -33,19 +35,22 @@ export default function SplashScreen() {
         useNativeDriver: true
       })
     ]).start();
-    // loading bar
     Animated.timing(progressAnim, {
       toValue: 1,
       duration: 2000,
       easing: Easing.linear,
       useNativeDriver: false
     }).start();
-    // set timeout currently, will add api dependent loading
     const timeout = setTimeout(() => {
-      navigation.replace('Home');
+      if (authLoading) return;
+      if (user) {
+        navigation.replace('Home');
+      } else {
+        navigation.replace('Login');
+      }
     }, 2000);
     return () => clearTimeout(timeout);
-  }, []);
+  }, [user, authLoading]);
 
   const barWidth = progressAnim.interpolate({
     inputRange: [0, 1],
@@ -101,7 +106,7 @@ const styles = StyleSheet.create({
     width: width * 0.4,
     height: 8,
     borderRadius: 4,
-    backgroundColor: '#e5e7eb', // fallback for light theme
+    backgroundColor: '#e5e7eb',
     overflow: 'hidden',
     alignSelf: 'center'
   },
