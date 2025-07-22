@@ -108,16 +108,19 @@ export default function Header({ activeScreen }) {
             </View>
           )}
         </TouchableOpacity>
-        {/* Theme toggle */}
+        {/* Profile icon */}
         <TouchableOpacity
-          onPress={toggleTheme}
+          onPress={() => {
+            // TODO: Navigate to profile or auth screen in the future
+            // This will be used for user authentication/profile
+          }}
           accessibilityRole="button"
           style={{ marginRight: 0 }}
         >
           <Feather
-            name="moon"
-            size={22}
-            color={theme.mode === 'dark' ? theme.primary : theme.text}
+            name="user"
+            size={24}
+            color={theme.text}
           />
         </TouchableOpacity>
       </View>
