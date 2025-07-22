@@ -1,7 +1,7 @@
 // - Shows product details: hero image, like, price, rating, size/color pickers, CTAs, description.
 // - Shared-element style fade-in for hero image.
 // - All interactions update context and UI instantly.
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View, Text, Image, TouchableOpacity, ScrollView } from 'react-native';
 import Header from '../components/Header';
 import SizePicker from '../components/SizePicker';
@@ -42,7 +42,7 @@ export default function ProductDetailScreen({ route }) {
   if (product.sizes) requiredParams.push('size');
   if (product.colors) requiredParams.push('color');
 
-  React.useEffect(() => {
+  useEffect(() => {
     let changed = false;
     const newSelection = { ...selected };
     if (product.sizes && !selected.size) {

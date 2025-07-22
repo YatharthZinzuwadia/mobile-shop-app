@@ -1,7 +1,7 @@
 // - Shows all products the user has added to their wishlist (favorites).
 // - Each item is clickable and has a 'Buy Now' CTA.
 // - Animated entry and empty state.
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import {
   View,
   Text,
@@ -23,9 +23,9 @@ export default function WishlistScreen() {
   const { theme } = useTheme();
   const { favourites, addToCart } = useShop();
   const navigation = useNavigation();
-  const fadeAnim = React.useRef(new Animated.Value(0)).current;
+  const fadeAnim = useRef(new Animated.Value(0)).current;
 
-  React.useEffect(() => {
+  useEffect(() => {
     Animated.timing(fadeAnim, {
       toValue: 1,
       duration: 400,

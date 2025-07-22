@@ -1,7 +1,7 @@
 // - Shopping cart screen with theme-aware, attractive UI.
 // - Each product is shown in a colored block row with image, name, price, and quantity controls.
 // - Cart summary and checkout CTA at the bottom.
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import {
   View,
   Text,
@@ -26,7 +26,7 @@ export default function CartScreen() {
   const { theme } = useTheme();
   const { cart, addToCart, removeFromCart } = useShop();
   const insets = useSafeAreaInsets();
-  const fadeAnim = React.useRef(new Animated.Value(0)).current;
+  const fadeAnim = useRef(new Animated.Value(0)).current;
   const navigation = useNavigation();
 
   const products = cart
@@ -36,7 +36,7 @@ export default function CartScreen() {
     })
     .filter(Boolean);
 
-  React.useEffect(() => {
+  useEffect(() => {
     Animated.timing(fadeAnim, {
       toValue: 1,
       duration: 400,

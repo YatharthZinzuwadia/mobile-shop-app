@@ -1,5 +1,5 @@
 // - Top bar for both screens.
-// - Shows Nike swoosh (SVG), favourites, cart (with badge), and theme toggle.
+// - Shows logo (SVG), favourites, cart (with badge), and theme toggle.
 // - Navigation to Favourites/Cart to be updated
 import React from 'react';
 import { View, TouchableOpacity, Text, Alert } from 'react-native';
@@ -45,7 +45,7 @@ export default function Header({ activeScreen }) {
             letterSpacing: 1.5
           }}
         >
-          yoKi
+          BSP
         </Text>
       </TouchableOpacity>
       {/* Right side: Favourites, Cart, Theme toggle */}

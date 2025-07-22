@@ -19,7 +19,6 @@ export default function SplashScreen() {
   const progressAnim = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
-    // Animate yoKi splash (scale + bounce)
     Animated.sequence([
       Animated.timing(splashAnim, {
         toValue: 1.12,
@@ -34,14 +33,14 @@ export default function SplashScreen() {
         useNativeDriver: true
       })
     ]).start();
-    // Animate loading bar
+    // loading bar
     Animated.timing(progressAnim, {
       toValue: 1,
       duration: 2000,
       easing: Easing.linear,
       useNativeDriver: false
     }).start();
-    // Navigate after 2 seconds
+    // set timeout currently, will add api depended loading
     const timeout = setTimeout(() => {
       navigation.replace('Home');
     }, 2000);
@@ -66,7 +65,7 @@ export default function SplashScreen() {
           ]
         }}
       >
-        <Text style={[styles.title, { color: theme.primary }]}>yoKi</Text>
+        <Text style={[styles.title, { color: theme.primary }]}>BSP</Text>
       </Animated.View>
       <View style={{ height: 32 }} />
       <View style={styles.barContainer}>

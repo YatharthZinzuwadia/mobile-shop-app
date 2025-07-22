@@ -13,7 +13,8 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.yatharth-zinzuwadia.mobileshopapp"
     },
     "android": {
       "adaptiveIcon": {
@@ -21,14 +22,14 @@
         "backgroundColor": "#ffffff"
       },
       "edgeToEdgeEnabled": true,
-      "package": "com.yatharthzinzuwadia.mobileshopapp"
+      "package": "com.yatharth_zinzuwadia.mobileshopapp"
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
     "extra": {
       "eas": {
-        "projectId": "2b1f22eb-c3cc-4d78-ab61-97749d011f83"
+        "projectId": "38eaa605-bb71-4967-931e-61b93e41f9a0"
       }
     }
   }
