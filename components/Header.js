@@ -45,7 +45,7 @@ export default function Header({ activeScreen }) {
             letterSpacing: 1.5
           }}
         >
-          BSP
+          yoKi
         </Text>
       </TouchableOpacity>
       {/* Right side: Favourites, Cart, Theme toggle */}

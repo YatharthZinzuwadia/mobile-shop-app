@@ -40,7 +40,7 @@ export default function SplashScreen() {
       easing: Easing.linear,
       useNativeDriver: false
     }).start();
-    // set timeout currently, will add api depended loading
+    // set timeout currently, will add api dependent loading
     const timeout = setTimeout(() => {
       navigation.replace('Home');
     }, 2000);
@@ -65,7 +65,7 @@ export default function SplashScreen() {
           ]
         }}
       >
-        <Text style={[styles.title, { color: theme.primary }]}>BSP</Text>
+        <Text style={[styles.title, { color: theme.primary }]}>yoKi</Text>
       </Animated.View>
       <View style={{ height: 32 }} />
       <View style={styles.barContainer}>
