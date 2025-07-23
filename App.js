@@ -14,12 +14,18 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import WishlistScreen from './screens/WishlistScreen';
 import CartScreen from './screens/CartScreen';
 import SplashScreen from './screens/SplashScreen';
+import { Feather } from '@expo/vector-icons';
+import { View, TouchableOpacity } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { AuthProvider, useAuth } from './context/AuthContext';
+import LoginScreen from './screens/LoginScreen';
+import SignupScreen from './screens/SignupScreen';
 
 const Stack = createNativeStackNavigator();
 
-// Custom navigation theme based on app theme
 function ThemedNavigation() {
   const { theme } = useTheme();
+
   return (
     <NavigationContainer
       theme={{
@@ -40,6 +46,8 @@ function ThemedNavigation() {
         initialRouteName="Splash"
       >
         <Stack.Screen name="Splash" component={SplashScreen} />
+        <Stack.Screen name="Login" component={LoginScreen} />
+        <Stack.Screen name="Signup" component={SignupScreen} />
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="ProductDetail" component={ProductDetailScreen} />
         <Stack.Screen name="Wishlist" component={WishlistScreen} />
@@ -49,14 +57,56 @@ function ThemedNavigation() {
   );
 }
 
+function ThemeFAB() {
+  // Floating Action Button for theme toggle
+  const { theme, toggleTheme } = useTheme();
+  const insets = useSafeAreaInsets();
+  return (
+    <TouchableOpacity
+      onPress={toggleTheme}
+      activeOpacity={0.85}
+      style={{
+        position: 'absolute',
+        bottom: (insets.bottom || 0) + 32,
+        right: (insets.right || 0) + 24,
+        width: 56,
+        height: 56,
+        borderRadius: 28,
+        backgroundColor: theme.primary,
+        alignItems: 'center',
+        justifyContent: 'center',
+        elevation: 6,
+        shadowColor: '#000',
+        shadowOpacity: 0.18,
+        shadowRadius: 8,
+        shadowOffset: { width: 0, height: 2 },
+        zIndex: 100
+      }}
+    >
+      <Feather
+        name={theme.mode === 'dark' ? 'sun' : 'moon'}
+        size={28}
+        color={'#fff'}
+      />
+    </TouchableOpacity>
+  );
+}
+
 export default function App() {
   return (
-    <SafeAreaProvider>
-      <ThemeProvider>
-        <ShopProvider>
-          <ThemedNavigation />
-        </ShopProvider>
-      </ThemeProvider>
-    </SafeAreaProvider>
+    <AuthProvider>
+      <SafeAreaProvider>
+        <ThemeProvider>
+          <ShopProvider>
+            <View style={{ flex: 1 }}>
+              {/* Main app navigation */}
+              <ThemedNavigation />
+              {/* Floating theme toggle button (FAB) */}
+              <ThemeFAB />
+            </View>
+          </ShopProvider>
+        </ThemeProvider>
+      </SafeAreaProvider>
+    </AuthProvider>
   );
 }

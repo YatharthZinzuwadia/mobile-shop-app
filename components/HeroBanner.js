@@ -1,6 +1,6 @@
 // - Full-width image carousel with dot indicators & tagline overlay.
 // - Uses local images from assets/images/ for banners.
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import {
   View,
   FlatList,
@@ -39,8 +39,26 @@ export default function HeroBanner() {
     setIndex(Math.round(x / width));
   };
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIndex((prev) => {
+        const next = prev + 1 < banners.length ? prev + 1 : 0;
+        if (flatRef.current) {
+          flatRef.current.scrollToIndex({ index: next, animated: true });
+        }
+        return next;
+      });
+    }, 3500);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
-    <View style={{ marginBottom: 16 }}>
+    <View
+      style={{
+        marginBottom: 16,
+        alignItems: 'center'
+      }}
+    >
       <FlatList
         ref={flatRef}
         data={banners}
@@ -49,6 +67,12 @@ export default function HeroBanner() {
         pagingEnabled // snap to each image
         showsHorizontalScrollIndicator={false}
         onScroll={onScroll}
+        snapToAlignment="center"
+        decelerationRate="fast"
+        contentContainerStyle={{
+          alignItems: 'center',
+          justifyContent: 'center'
+        }}
         renderItem={({ item }) => (
           <View style={{ width, alignItems: 'center' }}>
             {/* Banner image */}
